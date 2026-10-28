@@ -1,0 +1,27 @@
+fastapi
+uvicorn[standard]
+python-multipart
+
+pydantic
+pydantic-settings
+email-validator
+
+pymongo
+
+python-jose
+bcrypt
+
+python-dotenv
+
+pypdf
+
+httpx
+
+numpy
+
+# AI provider (Groq) and embeddings.
+# fastembed runs all-MiniLM-L6-v2 through ONNX Runtime: no PyTorch, so the
+# server fits in a small (512 MB) host. Same model and 384-dim vectors as
+# before, so embeddings already stored in MongoDB remain valid.
+groq
+fastembed

@@ -1,0 +1,56 @@
+# Render Blueprint for the backend API (the frontend goes on Vercel).
+# Render dashboard -> New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: ai-study-companion-api
+    runtime: python
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    buildCommand: pip install -r backend/requirements.txt && python backend/prefetch_model.py
+    startCommand: python backend/render_server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_EXPIRE_MINUTES
+        value: "60"
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: GROQ_MAX_KEY_ATTEMPTS
+        value: "3"
+      - key: MONGODB_DATABASE
+        value: ai_study_companion
+      - key: EMBEDDING_THREADS
+        value: "1"
+      - key: EMBEDDING_BATCH_SIZE
+        value: "8"
+      # Stops glibc from giving every thread its own memory arena, a
+      # common cause of creeping RSS in threaded Python on small hosts.
+      - key: MALLOC_ARENA_MAX
+        value: "2"
+      # Secrets: enter these in the Render dashboard (never commit them).
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: GROQ_API_KEY_1
+        sync: false
+      - key: GROQ_API_KEY_2
+        sync: false
+      - key: GROQ_API_KEY_3
+        sync: false
+      - key: GROQ_API_KEY_4
+        sync: false
+      - key: GROQ_API_KEY_5
+        sync: false
+      - key: GROQ_API_KEY_6
+        sync: false
+      # Your Vercel site, e.g. https://your-app.vercel.app (no trailing slash)
+      - key: CORS_ORIGINS
+        sync: false

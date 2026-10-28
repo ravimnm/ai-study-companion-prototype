@@ -1,0 +1,33 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Node / frontend
+node_modules/
+dist/
+*.local
+
+# Runtime data
+backend/data/
+data/uploads/
+data/processed/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Notebook backups
+*.backup_*.ipynb
+
+# Embedding model cache (downloaded at build time)
+backend/.model_cache/
+.model_cache/
